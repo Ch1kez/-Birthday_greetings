@@ -4,31 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53154703-3fe9-4bf6-87e1-49f89e8d9b77" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/26c4a2f9-da6c-468c-87da-5050f5570711.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/26c4a2f9-da6c-468c-87da-5050f5570711/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/af92719b-40b3-443a-b4f5-961144123bd2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/af92719b-40b3-443a-b4f5-961144123bd2/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ec05ce78-ff6d-4109-9fb4-54c71f262553.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/ec05ce78-ff6d-4109-9fb4-54c71f262553/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/dsasdsa" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datebase_workspace/test_database" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/flaskProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flaskProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="53154703-3fe9-4bf6-87e1-49f89e8d9b77" name="Changes" comment="Первая реализация">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datebase_workspace/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/datebase_workspace/Database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datebase_workspace/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/datebase_workspace/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hello.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/hello.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/вфыыфв.txt" beforeDir="false" afterPath="$PROJECT_DIR$/вфыыфв.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +60,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -231,8 +208,17 @@
       <workItem from="1721926343923" duration="1429000" />
       <workItem from="1721930268671" duration="605000" />
       <workItem from="1722194979353" duration="613000" />
-      <workItem from="1722275679707" duration="9531000" />
+      <workItem from="1722275679707" duration="10179000" />
     </task>
+    <task id="LOCAL-00001" summary="Первая реализация">
+      <option name="closed" value="true" />
+      <created>1722294350418</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722294350418</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +237,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Организация работы базы данных" />
+    <MESSAGE value="Первая реализация" />
+    <option name="LAST_COMMIT_MESSAGE" value="Первая реализация" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProject$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1722293240395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
