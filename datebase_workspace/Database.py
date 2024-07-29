@@ -4,10 +4,10 @@ import sqlite3
 
 class DatabaseConnection:
     def __init__(self, db_name: str) -> None:
-        self.db_name = db_name
+        self._db_name = f"./{db_name}.db"
 
     def __enter__(self):
-        self.conn = sqlite3.connect(self.db_name)
+        self.conn = sqlite3.connect(self._db_name)
         self.cursor = self.conn.cursor()
         return self.cursor
 
@@ -21,10 +21,11 @@ class DatabaseConnection:
 
 class Database:
     def __init__(self, db_name: str):
-        self.database_connection = DatabaseConnection(db_name)
+        self.__database_connection = DatabaseConnection(db_name)
+        self.__create_db_structure()
 
-    def create_db_structure(self):
-        with self.database_connection as cursor:
+    def __create_db_structure(self):
+        with self.__database_connection as cursor:
             cursor.execute("""CREATE TABLE IF NOT EXISTS blocks (
                      id INTEGER PRIMARY KEY AUTOINCREMENT,
                      idblock TEXT,
@@ -46,9 +47,15 @@ class Database:
         hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
         # Подключение к нашей базе данных
-        with self.database_connection as cursor:
+        with self.__database_connection as cursor:
             # Добавление нового сотрудника
             cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+
+    def check_user(self, username: str):
+        # создаем запрос для поиска пользователя по username,
+        # если такой пользователь существует, то получаем все данные id, password
+        with self.__database_connection as cursor:
+            return cursor.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
 
 
 if __name__ == '__main__':
