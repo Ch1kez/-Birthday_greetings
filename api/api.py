@@ -1,15 +1,14 @@
 import hashlib
-from app import app, db
-from flask import request, jsonify
+from flask import Blueprint, request, jsonify
+from extensions import db
+from .work_with_token import generate_token, require_token
 
-from work_with_token import generate_token, require_token
+api_bp = Blueprint('api', __name__)
 
-
-@app.route('/api/get_token', methods=['get'])
+@api_bp.route('/get_token', methods=['POST'])
 def get_token():
-    print(request.json)
-    username = request.form['username']
-    password = request.form['password']
+    username = request.json.get('username')
+    password = request.json.get('password')
     user = db.check_user(username)
 
     if user and user['password'] == hashlib.sha256(password.encode('utf-8')).hexdigest():
@@ -18,7 +17,7 @@ def get_token():
     else:
         return jsonify({'error': 'Invalid credentials'}), 401
 
-@app.route('/api/protected_endpoint', methods=['GET'])
+@api_bp.route('/protected_endpoint', methods=['GET'])
 @require_token
 def protected_endpoint():
     return jsonify({'message': 'This is a protected API endpoint.'})

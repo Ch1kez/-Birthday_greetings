@@ -1,73 +1,58 @@
 import hashlib
-
 from flask import Flask, render_template, redirect, url_for, request, session
-
-from datebase_workspace import Database
+from extensions import db
 
 app = Flask(__name__)
-db = Database('test_database')
+app.secret_key = 'your_secret_key_here'
 
+# Регистрация Blueprint для API
+from api.api import api_bp
+app.register_blueprint(api_bp, url_prefix='/api')
 
 @app.route('/')
 def welcome_page():
-    """
-    Начальная страница приложения для поздравления сотрудников
-    :return:
-    """
+    """Начальная страница приложения для поздравления сотрудников"""
     return render_template('index.html')
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """
-    Страница для входа в приложение
-    :return:
-    """
-    # error = None  # обнуляем переменную ошибок
+    """Страница для входа и регистрации в приложении"""
     if request.method == 'POST':
-        username = request.form['username']  # обрабатываем запрос с нашей формы который имеет атрибут name="username"
-        password = request.form['password']  # обрабатываем запрос с нашей формы который имеет атрибут name="password"
+        username = request.form['username']
+        password = request.form['password']
+        action = request.form.get('action')  # Получаем действие (вход или регистрация)
+        print(username, password)
+        hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        if action == 'register':
+            # Регистрация нового пользователя
+            if db.check_user(username):
+                error = 'Пользователь с таким именем уже существует'
+                return render_template('login.html', error=error)
 
-        hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()  # шифруем пароль в sha-256
-        user = db.check_user(username=username)
-        print(user)
+            db.create_user(username, hashed_password)
+            return redirect(url_for('login'))
 
-        # теперь проверяем если данные сходятся формы с данными БД
-        if user and user['password'] == hashed_password:
-            # в случае успеха создаем сессию в которую записываем id пользователя
-            session['user_id'] = user['id']
-            # и делаем переадресацию пользователя на новую страницу
-            return redirect(url_for('personal_panel'))
+        elif action == 'login':
+            # Вход пользователя
+            user = db.check_user(username=username)
+            print(user)
+            print(user[2] == hashed_password)
+            print(user[2] , hashed_password)
+            if user and user[2] == hashed_password:
+                session['user_id'] = user[0]
+                return redirect(url_for('personal_panel'))
+            else:
+                error = 'Неправильное имя пользователя или пароль'
+                return render_template('login.html', error=error)
 
-        else:
-            error = 'Неправильное имя пользователя или пароль'
-            return render_template('login.html', error=error)
     return render_template('login.html')
-
-
-# @app.route('/login', methods = ['GET', 'POST'])
-# @oid.loginhandler
-# def login():
-#   if g.user is not None and g.user.is_authenticated():
-#       return redirect(url_for('index'))
-#   form = LoginForm()
-#   if form.validate_on_submit():
-#       session['remember_me'] = form.remember_me.data
-#       return oid.try_login(form.openid.data, ask_for = ['nickname', 'email'])
-#   return render_template('login.html',
-#       title = 'Sign In',
-#       form = form,
-#       providers = app.config['OPENID_PROVIDERS'])
-
 
 @app.route('/personal')
 def personal_panel():
-    """
-    Личный кабинет сотрудника
-    :return:
-    """
-    return render_template('personal_panel.html')
-
+    """Личный кабинет сотрудника"""
+    if 'user_id' in session:
+        return render_template('personal_panel.html')
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

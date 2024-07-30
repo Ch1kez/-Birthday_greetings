@@ -1,0 +1,48 @@
+POST http://127.0.0.1:5000/api/get_token
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"username": "123", "password" : "123"}
+
+<> 2024-07-31T005832.401.json
+
+###
+
+POST http://127.0.0.1:5000/api/get_token
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"username": "123", "password" : "123"}
+
+<> 2024-07-31T003238.404.html
+
+###
+
+POST http://127.0.0.1:5000/api/get_token
+Content-Type: application/json
+Content-Length: 39
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"username": "123", "password" : "123"}
+
+<> 2024-07-31T003210.404.html
+
+###
+
+GET http://127.0.0.1:5000/api/get_token
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-07-31T002901.404.html
+
+###
+
