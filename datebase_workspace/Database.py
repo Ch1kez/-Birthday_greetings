@@ -38,10 +38,23 @@ class Database:
                      timestampdata DATETIME)""")
 
             cursor.execute("""CREATE TABLE IF NOT EXISTS users (
-                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                     username TEXT,
-                     password TEXT)""")
+                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 username TEXT,
+                                 password TEXT,
+                                 birthday DATE)""")
 
+            cursor.execute("""CREATE TABLE IF NOT EXISTS subscriptions (
+                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 user_id INTEGER,
+                                 subscribed_to INTEGER,
+                                 FOREIGN KEY(user_id) REFERENCES users(id),
+                                 FOREIGN KEY(subscribed_to) REFERENCES users(id))""")
+
+            cursor.execute("""CREATE TABLE IF NOT EXISTS api_tokens (
+                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                 user_id INTEGER,
+                                 token TEXT,
+                                 FOREIGN KEY(user_id) REFERENCES users(id))""")
     def create_user(self, username, password):
         # Хеширование пароля
         hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
@@ -56,6 +69,20 @@ class Database:
         # если такой пользователь существует, то получаем все данные id, password
         with self.__database_connection as cursor:
             return cursor.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+
+    def subscribe_to_user(self, user_id, subscribed_to_id):
+        with self.__database_connection as cursor:
+            cursor.execute('INSERT INTO subscriptions (user_id, subscribed_to) VALUES (?, ?)',
+                           (user_id, subscribed_to_id))
+
+    def unsubscribe_from_user(self, user_id, subscribed_to_id):
+        with self.__database_connection as cursor:
+            cursor.execute('DELETE FROM subscriptions WHERE user_id = ? AND subscribed_to = ?',
+                           (user_id, subscribed_to_id))
+
+    def set_api_token(self, user_id):
+        with db.__database_connection as cursor:
+            cursor.execute('INSERT INTO api_tokens (user_id, token) VALUES (?, ?)', (user_id, token))
 
 
 if __name__ == '__main__':

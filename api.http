@@ -1,0 +1,7 @@
+POST http://127.0.0.1:5000/api/get_token
+Content-Type: application/json
+
+{"username": "123", "password" : "123"}
+
+###
+http://127.0.0.1:5000/api/get_token
